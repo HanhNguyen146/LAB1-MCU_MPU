@@ -90,10 +90,7 @@ void runClock(){
     while (1) {
         clearALLClock();
         setTimeOnClock(hour, minute, second);
-
         HAL_Delay(4);
-
-
         second++;
         if (second >= 60) {
             second = 0;
@@ -139,13 +136,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
-  //clearALLClock();
-  //setNumberOnClock(3);
-  //setTimeOnClock(18, 50, 45);
-
-  //clearNumberOnClock(3);
-
 
   /* USER CODE END 2 */
 

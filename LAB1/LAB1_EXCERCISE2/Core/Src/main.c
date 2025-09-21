@@ -54,7 +54,28 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void trafficlight(int counter){
+	int t = counter % 10;
 
+	    if (t < 3) {
+	        // GREEN 3s
+	        HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+	        HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+	        HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+	    }
+	    else if (t < 5) {
+	        // YELLOW 2s
+	        HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+	        HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+	        HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+	    }
+	    else {
+	        // RED 5s
+	        HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+	        HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+	        HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+	    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -88,31 +109,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-
+  int counter = 0;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-	  	 // GREEN 5s
-	  	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin,SET);
-	  	 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin,SET);
-	  	 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin,SET);
-	  	 HAL_Delay(3000);
-	  	 // YELLOW 2s
-	  	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin,SET);
-	  	 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin,RESET);
-	  	 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin,RESET);
-	  	 HAL_Delay(2000);
-	  	 // RED 3s
-	     HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-	     HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin,SET);
-	     HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin,RESET);
-	     HAL_Delay(5000);
-
-
-
-
+	  trafficlight(counter);
+	  counter++;
+	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
